@@ -49,9 +49,13 @@ def testInContext(fps, seconds, noise, path_generator, k, finestra):
     if path.ndim > 2: return
 
     if path.ndim == 1:
+        plt.xlabel("Time in seconds")
+        plt.ylabel("Value")
         plt.plot(time, path, style_path, time, data, style_data, time, mm, style_mm, time, mp, style_mp, ms=1)
 
     if path.ndim == 2:
+        plt.xlabel("x pos")
+        plt.ylabel("y pos")
         x = lambda arr: arr[:,0]
         y = lambda arr: arr[:,1]
         plt.plot(x(path), y(path), style_path, x(data), y(data), style_data, x(mm), y(mm), style_mm, x(mp), y(mp), style_mp, ms=1)
