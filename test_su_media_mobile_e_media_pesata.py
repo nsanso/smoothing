@@ -2,6 +2,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from IPython.display import set_matplotlib_formats
+set_matplotlib_formats('svg', 'pdf')
+
 def media_mobile(array: np.ndarray, finestra: int):
     shape = array.shape
     res = np.zeros(shape)
@@ -27,10 +30,10 @@ def media_pesata(array, k):
     return res
 
 def testInContext(fps, seconds, noise, path_generator, k, finestra):
-    style_path = 'ko'
-    style_data = 'ro'
-    style_mm = 'co'
-    style_mp = 'mo'
+    style_path = 'k-'
+    style_data = 'r-'
+    style_mm = 'c-'
+    style_mp = 'm-'
 
     size = fps * seconds
 
@@ -51,14 +54,14 @@ def testInContext(fps, seconds, noise, path_generator, k, finestra):
     if path.ndim == 1:
         plt.xlabel("Time in seconds")
         plt.ylabel("Value")
-        plt.plot(time, path, style_path, time, data, style_data, time, mm, style_mm, time, mp, style_mp, ms=1)
+        plt.plot(time, path, style_path, time, data, style_data, time, mm, style_mm, time, mp, style_mp, ms=1, linewidth=.3)
 
     if path.ndim == 2:
         plt.xlabel("x pos")
         plt.ylabel("y pos")
         x = lambda arr: arr[:,0]
         y = lambda arr: arr[:,1]
-        plt.plot(x(path), y(path), style_path, x(data), y(data), style_data, x(mm), y(mm), style_mm, x(mp), y(mp), style_mp, ms=1)
+        plt.plot(x(path), y(path), style_path, x(data), y(data), style_data, x(mm), y(mm), style_mm, x(mp), y(mp), style_mp, ms=1, linewidth=.3)
     
     plt.show()
     return
@@ -68,7 +71,7 @@ fps = 15
 sec = 10
 noise = 10
 k = .9
-finestra = 3
+finestra = 15
 
 t = lambda gen: testInContext(fps, sec, noise, gen, k, finestra)
 
