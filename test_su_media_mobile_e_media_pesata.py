@@ -25,8 +25,6 @@ def media_pesata(array, k):
         if i == 0:
             continue
         res[i] = k * res[i-1] + (1-k) * array[i]
-        # if i < 2: continue
-        # res[i] += (res[i-1] - res[i-2]) * (1-k)
     return res
 
 def testInContext(fps, seconds, noise, path_generator, k, finestra):
@@ -75,23 +73,28 @@ finestra = 15
 
 t = lambda gen: testInContext(fps, sec, noise, gen, k, finestra)
 
-
 print("NERO = REALE, ROSSO = CON RUMORE, CELESTE = MEDIA MOBILE, ROSSO = SOMMA PESATA")
+print(f"k = {k}, finestra = {finestra}")
+
 # %%
+print("1d - polinomial")
 polinomial = lambda x: (x ** 3 + x ** 2 + x) * .1
 t(polinomial)
 # %%
+print("1d - sharp")
 sharp = lambda x: 5 if x < 5 else 90
 
 t(sharp)
 
 # %%
+print("2d - linear")
 def linear2d(x):
     return [10* x, x]
     
 t(linear2d)
 
 # %%
+print("2d - sharp")
 def sharp2d(x):
     if x < 3:
         return [10 * x, 0 * x]
